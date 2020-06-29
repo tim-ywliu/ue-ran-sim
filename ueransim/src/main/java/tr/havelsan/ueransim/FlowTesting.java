@@ -26,8 +26,11 @@
 
 package tr.havelsan.ueransim;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.javalin.Javalin;
 import sun.misc.Signal;
 import sun.misc.SignalHandler;
+import tr.havelsan.ueransim.controller.FeatureController;
 import tr.havelsan.ueransim.core.Constants;
 import tr.havelsan.ueransim.core.SimulationContext;
 import tr.havelsan.ueransim.mts.*;
@@ -52,7 +55,16 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FlowTesting {
 
+    static ArrayList<String> typeNames;
+
+    public static ArrayList<String> getTypeNames() {
+        return typeNames;
+    }
+
     public static void main(String[] args) throws Exception {
+
+        Javalin app = Javalin.create().start(7000);
+
         MtsInitializer.initMts();
 
         var scanner = new Scanner(System.in);
@@ -64,7 +76,7 @@ public class FlowTesting {
         }
 
         var types = new LinkedHashMap<String, Class<? extends BaseFlow>>();
-        var typeNames = new ArrayList<String>();
+        typeNames = new ArrayList<>();
         for (String fn : FlowScanner.getFlowNames()) {
             var type = FlowScanner.getFlowType(fn);
             types.put(fn, type);
@@ -117,6 +129,8 @@ public class FlowTesting {
             }
             return;
         }
+
+        app.get("/features", FeatureController.fetchAllUsernames);
 
         while (true) {
             Console.printDiv();
