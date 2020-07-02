@@ -4,7 +4,6 @@ import io.javalin.Javalin;
 import tr.havelsan.ueransim.mts.MtsInitializer;
 
 public class Backend {
-
     public static void main(String[] args) {
         MtsInitializer.initMts();
 
@@ -15,5 +14,8 @@ public class Backend {
 
         app.post("/createResource", FeatureController.postCtx);
         app.options("/createResource", FeatureController.optionsGeneric);
+
+        Javalin.create().start(7070).ws("/demo",ws -> ws.onConnect(w  -> w.send("5")));
+
     }
 }
