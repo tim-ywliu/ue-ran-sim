@@ -11,7 +11,7 @@ public class FeatureController {
         ctx.header("Access-Control-Allow-Methods", "*");
     };
 
-    public static Handler fetchAllUsernames = ctx -> {
+    public static Handler fetchFeatures = ctx -> {
         optionsGeneric.handle(ctx);
 
         ctx.json(FlowScanner.getFlowNames());

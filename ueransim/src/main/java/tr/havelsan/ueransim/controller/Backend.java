@@ -9,7 +9,7 @@ public class Backend {
 
         Javalin app = Javalin.create().start(7000);
 
-        app.get("/features", FeatureController.fetchAllUsernames);
+        app.get("/features", FeatureController.fetchFeatures);
         app.options("/features", FeatureController.optionsGeneric);
 
         app.post("/createResource", FeatureController.postCtx);
