@@ -1,7 +1,7 @@
 package tr.havelsan.ueransim.controller;
 
 import io.javalin.http.Handler;
-import tr.havelsan.ueransim.utils.FlowScanner;
+import tr.havelsan.ueransim.events.EventParser;
 
 public class FeatureController {
 
@@ -14,12 +14,10 @@ public class FeatureController {
     public static Handler fetchFeatures = ctx -> {
         optionsGeneric.handle(ctx);
 
-        ctx.json(FlowScanner.getFlowNames());
+        ctx.json(EventParser.possibleEvents());
     };
 
     public static Handler postCtx = ctx -> {
         optionsGeneric.handle(ctx);
-
-        System.out.printf("Flow "+ ctx.body());
     };
 }
