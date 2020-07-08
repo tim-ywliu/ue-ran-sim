@@ -52,10 +52,6 @@ public class Backend {
 
             }
 
-            System.out.println(ctx.message());
-
-
-
             ctx.send(Json.toJson(stringBuilder.toString()));
 
             stringList.clear();
@@ -64,11 +60,9 @@ public class Backend {
 
         @Override
         public void handleConnect(@NotNull WsConnectContext ctx){
-
             ctx.send(Json.toJson(EventParser.possibleEvents()));
         }
     }
-
 
 }
 
