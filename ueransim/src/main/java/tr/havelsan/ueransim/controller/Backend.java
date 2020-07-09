@@ -7,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
 import tr.havelsan.ueransim.Program;
 import tr.havelsan.ueransim.events.EventParser;
 import tr.havelsan.ueransim.utils.Console;
-import tr.havelsan.ueransim.utils.Json;
 
 
 import java.util.ArrayList;
@@ -43,24 +42,18 @@ public class Backend {
         @Override
         public void handleMessage(@NotNull WsMessageContext ctx) {
 
-            var stringBuilder = new StringBuilder();
 
             for (var s : stringList) {
-
-                stringBuilder.append(s);
-                stringBuilder.append("\r\n");
-
+                ctx.send(new Wrapper("log",s));
             }
-
-            ctx.send(Json.toJson(stringBuilder.toString()));
 
             stringList.clear();
 
         }
 
         @Override
-        public void handleConnect(@NotNull WsConnectContext ctx){
-            ctx.send(Json.toJson(EventParser.possibleEvents()));
+        public void handleConnect(@NotNull WsConnectContext ctx) {
+            ctx.send(new Wrapper("possibleEvents", EventParser.possibleEvents()));
         }
     }
 
