@@ -1,0 +1,231 @@
+<div class="col-md-12 col-lg-12 col-xxxl-12">
+  <nb-card>
+    <nb-card-body>
+      <nb-stepper #stepper>
+        <nb-step [stepControl]="firstForm" label="Basic Info" style="width:600px;">
+          <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
+            <nb-card>
+              <nb-card-header>NSS Rule</nb-card-header>
+              <nb-card-body>
+                <div class="input-group">
+                  <label for="pName" class="label">NSS Rule Name <span style="color: red">*</span></label>
+                  <input type="text" nbInput fullWidth id="pName" name="pName"
+                    placeholder="NSS Rule Name" class="form-control" formControlName="name"
+                    [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+                </div>
+                <div class="form-group">
+                  <label for="pSalience" class="label">Salience</label>
+                  <input type="text" nbInput fullWidth id="pSalience" name="pSalience" placeholder="Salience"
+                    class="form-control" formControlName="salience"
+                    [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+                </div>
+              </nb-card-body>
+            </nb-card>
+            <div style="text-align: center;">
+              <button nbButton nbStepperNext>next</button>
+            </div>
+          </form>
+        </nb-step>
+        <nb-step [stepControl]="secondForm" label="TAI-SNSSAI" style="width:600px;">
+          <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <nb-card>
+                  <nb-card-header>TAI</nb-card-header>
+                    <nb-card>
+                      <nb-card-header>PLMN ID</nb-card-header>
+                        <nb-card-body>
+                    <div class="form-group">
+                      <label for="pMcc" class="label">MCC <span style="color: red">*</span></label>
+                      <input type="text" nbInput fullWidth id="pMcc" name="pMcc" placeholder="MCC"
+                        required class="form-control" formControlName="mcc" [attr.readOnly]="true"
+                        [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                    </div>
+                    <div class="form-group">
+                      <label for="pMnc" class="label">MNC <span style="color: red">*</span></label>
+                      <input type="text" nbInput fullWidth id="pMnc" name="pMnc" placeholder="MNC"
+                        required class="form-control" formControlName="mnc" [attr.readOnly]="true"
+                        [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                    </div>
+                  </nb-card-body>
+                </nb-card>
+
+
+                    <nb-card>
+                      <nb-card-header>TAC <span style="color: red">*</span></nb-card-header>
+                      <nb-card-body>
+                        <div class="form-group">
+                          <input type="text" nbInput fullWidth id="pTac" name="pTac" placeholder="TAC"
+                            required class="form-control" formControlName="tac"
+                            [ngClass]="
+                                    {'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                        </div>
+                      </nb-card-body>
+                    </nb-card>
+
+
+              </nb-card>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <nb-card>
+                    <nb-card-header>SNSSAI</nb-card-header>
+                  <nb-card-body>
+                    <div class="form-group">
+                      <label for="pSst" class="label">SST <span style="color: red">*</span></label>
+                      <input type="text" nbInput fullWidth id="pSst" name="pSst" placeholder="SST" required
+                        class="form-control" formControlName="sst"
+                        [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                    </div>
+                    <div class="form-group">
+                      <label for="pSd" class="label">SD</label>
+                      <input type="text" nbInput fullWidth id="pSd" name="pSd" placeholder="SD" class="form-control"
+                        formControlName="sd"
+                        [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                    </div>
+                  </nb-card-body>
+                </nb-card>
+              </div>
+              
+              
+            </div>
+            <div style="text-align: center;">
+              <button nbButton nbStepperPrevious>prev</button>
+              <button nbButton nbStepperNext>next</button>
+            </div>
+          </form>
+        </nb-step>
+        <nb-step [stepControl]="thirdForm" label="Behaviour" style="width:600px;">
+          <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-4">
+                <nb-card>
+                  <nb-card-header>Behaviour</nb-card-header>
+                  <nb-card-body>
+                    <div class="form-group">
+                      <label for="pGrant" class="label">Grant <span style="color: red">*</span></label>
+                      <input type="text" nbInput id="pGrant" name="pGrant" placeholder="Grant"
+                        required class="form-control" formControlName="grant" value="ALLOWED" [attr.readOnly]="true"
+                        [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+                    
+                      <!-- <nb-select id="pGrant" name="pGrant" fullWidth style="margin-left:-10px;"
+                        formControlName="grant"
+                        [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}"
+                        selected="ALLOWED">
+                        <nb-option value="ALLOWED">ALLOWED</nb-option>
+                        <nb-option value="RESTRICTED">RESTRICTED</nb-option>
+                      </nb-select> -->
+                    </div>
+                    <div class="form-group">
+                      <label for="pAccessType" class="label">Access Type <span style="color: red">*</span></label>
+                      <input type="text" nbInput id="pAccessType" name="pAccessType" placeholder="Access Type"
+                        required class="form-control" formControlName="accessType" value="3GPP_ACCESS" [attr.readOnly]="true"
+                        [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+
+                      <!-- <nb-select id="pAccessType" name="pAccessType" fullWidth style="margin-left:-10px;"
+                        formControlName="accessType"
+                        [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}"
+                        selected="3GPP_ACCESS">
+                        <nb-option value="3GPP_ACCESS">ACCESS_3GPP</nb-option>
+                        <nb-option value="NON_3GPP_ACCESS">NON_3GPP_ACCESS</nb-option>
+                      </nb-select> -->
+                    </div>
+                  </nb-card-body>
+                </nb-card>
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <nb-card>
+                  <nb-card-header>Nsi Profiles</nb-card-header>
+                  <nb-card-body>
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="form-group">
+                          <label for="selectedNsiProfile" class="label">NSI Profile</label>
+                          <nb-select formControlName="selectedNsiProfile" fullWidth
+                            [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+                            <nb-option *ngFor="let nsiProfile of nsiProfileList" [value]="nsiProfile.name">
+                              {{ nsiProfile.name }}
+                            </nb-option>
+                          </nb-select>
+                        </div>
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="form-group" style="margin-top:10px;">
+                          <label for="pSelectedNsiProfileSalience" class="label">Salience</label>
+                          <input type="text" fullWidth nbInput id="pSelectedNsiProfileSalience"
+                            name="pSelectedNsiProfileSalience" placeholder="Salience" class="form-control"
+                            formControlName="selectedNsiProfileSalience"
+                            [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+                        </div>
+                      </div>
+                      <div class="col-lg-1 col-md-1 col-sm-1">
+                        <div class="form-group">
+                          <label class="label" style="color: white">Add</label>
+                          <button
+                            [disabled]="nsiProfileList.length===0||this.thirdForm.value.selectedNsiProfile===''||this.thirdForm.value.selectedNsiProfileSalience===''"
+                            nbButton (click)="addNsiProfile()">+</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="form-group">
+                          <table class="table">
+                            <tr style="text-align: center;">
+                              <th></th>
+                              <th>Name</th>
+                              <th>Salience</th>
+                            </tr>
+                            <tr *ngFor="let appropriateNsiProfile of nssRule.behavior.nsiProfileList"
+                              style="text-align: center;">
+                              <td><button nbButton status="danger" size= tiny (click)="deleteProfile(appropriateNsiProfile)">X</button> </td>
+                              <td>{{ appropriateNsiProfile.name }}</td>
+                              <td>{{ appropriateNsiProfile.salience }}</td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </nb-card-body>
+                </nb-card>
+              </div>
+            </div>
+            <div style="text-align: center;">
+              <button nbButton nbStepperPrevious>prev</button>
+              <button nbButton nbStepperNext (click)="create()">Confirm</button>
+            </div>
+          </form>
+        </nb-step>
+        <!-- <nb-step [stepControl]="fourthForm" label="SNSSAI" style="width:600px;">
+          <form [formGroup]="fourthForm" (ngSubmit)="onFourthSubmit()" class="step-container">
+            <nb-card>
+              <nb-card-body>
+                <div class="form-group">
+                  <label for="pSst" class="label">SST <span style="color: red">*</span></label>
+                  <input type="text" nbInput fullWidth id="pSst" name="pSst" placeholder="SST" required
+                    class="form-control" formControlName="sst"
+                    [ngClass]="{'form-control-danger': fourthForm.invalid && (fourthForm.dirty || fourthForm.touched)}">
+                </div>
+                <div class="form-group">
+                  <label for="pSd" class="label">SD</label>
+                  <input type="text" nbInput fullWidth id="pSd" name="pSd" placeholder="SD" class="form-control"
+                    formControlName="sd"
+                    [ngClass]="{'form-control-danger': fourthForm.invalid && (fourthForm.dirty || fourthForm.touched)}">
+                </div>
+              </nb-card-body>
+            </nb-card>
+            <div style="text-align: center;">
+              <button nbButton nbStepperPrevious>prev</button>
+              <button nbButton nbStepperNext (click)="create()">Confirm</button>
+            </div>
+          </form>
+        </nb-step> -->
+        <!-- <nb-step [stepControl]="fourthForm" [hidden]="true" label="Fourth step">
+          <div class="step-container">
+            <h3>Wizard completed!</h3>
+            <button nbButton (click)="stepper.reset()">Try again</button>
+          </div>
+        </nb-step> -->
+      </nb-stepper>
+    </nb-card-body>
+  </nb-card>
+</div>

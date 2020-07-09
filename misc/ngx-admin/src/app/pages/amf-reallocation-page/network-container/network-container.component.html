@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-lg-1 col-md-1 col-sm-1">
+    <button
+      *ngFor="let item of items; let i = index"
+      [ngClass]="(lastClickedIndex == counter) ? 'activeBtn': ''"
+      (click)="changeActive(i)"
+      #disable>
+      nbButton status="primary" size="small" shape="round" value="{{counter}}" (click)="getAll()"
+      [disabled]="buttonClicked"
+      style="margin-top: 150px;">
+      <span>Start</span>
+    </button>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-3">
+    <ngx-network-device #netDevice></ngx-network-device>
+  </div>
+  <div class="col-lg-1 col-md-1 col-sm-1">
+    <canvas id="canvas1" class="arrow"></canvas>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-3">
+    <ngx-base-station-device #baseStationDevice></ngx-base-station-device>
+  </div>
+  <div class="col-lg-1 col-md-1 col-sm-1">
+    <canvas id="canvas2" class="arrow"></canvas>
+  </div>
+  <div class="col-lg-1 col-md-1 col-sm-1">
+  </div>
+  <div class="col-lg-1 col-md-1 col-sm-1">
+    <canvas id="canvas3" class="arrow"></canvas>
+  </div>
+  <div class="col-lg-2 col-md-2 col-sm-2">
+  </div>
+</div>
+<div class="row">
+    <ngx-base-terminal-device style="width: 100%" #terminalDevice></ngx-base-terminal-device>
+</div>

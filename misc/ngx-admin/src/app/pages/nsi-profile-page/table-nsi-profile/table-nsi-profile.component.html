@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-md-12">
+      <nb-card>
+    <nb-card-header>
+      NSI Profiles
+    </nb-card-header>
+    <nb-card-body>
+      <table class ="table">
+        <tr style="text-align: center;">
+          <th width="2%"></th>
+          <th width="2%"></th>
+          <th width="32%">Name</th>
+          <th width="32%">NRF URI</th>
+          <th width="32%">NSI Id</th>             
+        </tr>
+        <tr *ngFor="let u of nsiProfiles"  style="text-align: center;">
+          <td>  
+              <button class='btn btn-danger' (click)="deleteNssRule(u)">
+                  <i class="fas fa-trash-alt"></i>                  
+              </button>            
+          </td>
+          <td>  
+              <button class='btn btn-primary' (click)="show(u)">
+                  <i class="fa fa-search"></i>                  
+              </button>            
+          </td>
+          <td>
+              <button nbButton status="primary" size= small ghost>                  
+                  <span>{{u.name}}</span>
+              </button>
+          </td>
+          <td>
+              <button nbButton status="primary" size= small ghost>                  
+                  <span>{{u.nrfUri}}</span>
+              </button>
+          </td>
+          <td>
+              <button nbButton status="primary" size= small ghost>                  
+                  <span>{{u.nsiId}}</span>
+              </button>
+          </td>
+        </tr>        
+      </table>      
+    </nb-card-body>
+  </nb-card>
+  </div>
+  </div>
+  

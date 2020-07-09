@@ -1,0 +1,97 @@
+<nb-card>
+    <nb-card-header>NSI Profile</nb-card-header>
+    <nb-card-body>
+      <form>
+        <div class="row">
+                <nb-card>
+                        <nb-card-header>Basic Information</nb-card-header>
+                        <nb-card-body>  
+                <div class="form-group">
+                        <label for="pName" class="label">NSI Profile Name</label>
+                        <input [(ngModel)]="nsiProfile.name"  [attr.readOnly]="editMode ? null : ''" type="text" nbInput fullWidth id="pName" name="pName"  placeholder="NSI Profile Name" required>
+                </div>
+                <div class="form-group">
+                        <label for="pName" class="label">NRF Uri</label>
+                        <input [(ngModel)]="nsiProfile.nrfUri"  [attr.readOnly]="editMode ? null : ''" type="text" nbInput fullWidth id="pNrfUri" name="pNrfUri"  placeholder="NRF Uri" required>
+                </div>
+                <div class="form-group">
+                        <label for="pName" class="label">NSI Id</label>
+                        <input [(ngModel)]="nsiProfile.nsiId"  [attr.readOnly]="editMode ? null : ''" type="text" nbInput fullWidth id="pNsiId" name="pNsiId"  placeholder="NSI Id" required>
+                </div>
+            </nb-card-body>
+        </nb-card>   
+
+        <div class="form-group">
+                <label for="pTargetAmfSetList" class="label">Target Amf Set</label>
+                <div *ngIf="editMode; else newRule">
+                    <nb-select selected="1" fullWidth id="pTargetAmfSetList" required> 
+                      <nb-option *ngFor="let targetAmfSet of pTargetAmfSetList" value="{{ nsiProfile.name }}">
+                            {{ nsiProfile.name }}
+                      </nb-option>
+                    </nb-select>  
+                  </div>
+                  
+                  <ng-template #newRule>
+                      <table class ="table">
+                          <tr style="text-align: center;">
+                              <th>Name</th>
+                              <th>Salience</th>
+                          </tr>
+                          <tr  *ngFor="let nsiProfile of nssRule.behavior.nsiProfileList" style="text-align: center;" >
+                              <td>{{ nsiProfile.name }}</td>
+                              <td>{{ nsiProfile.salience }}</td>
+                          </tr>
+                      </table>                     
+                  </ng-template>
+                                     
+            </div>
+
+        
+          <div *ngIf="(nsiProfile.targetAmfSet.length > 0) || editMode" class="col-sm-6">
+              <nb-card>
+                  <nb-card-header>Target AMF Set*</nb-card-header>
+                  <nb-card-body>       
+                    <div *ngIf="editMode" class="row">
+                      <div class="col-lg-5 col-md-5 col-sm-5">
+                        <div class="form-group">
+                          <label for="pRegionId" class="label">Region Id*</label>
+                          <input [(ngModel)]="targetAmfSet.regionId"  [attr.readOnly]="editMode ? null : ''" type="text" nbInput fullWidth status="danger" id="pRegionId" name="pRegionId" placeholder="Region Id" required>
+                        </div>
+                      </div>
+                      <div class="col-lg-5 col-md-5 col-sm-5">
+                        <div class="form-group">
+                          <label for="pSetId" class="label">Set Id*</label>
+                          <input [(ngModel)]="targetAmfSet.setId"  [attr.readOnly]="editMode ? null : ''" type="text" nbInput fullWidth status="danger" id="pSetId" name="pSetId" placeholder="Set Id" required>
+                        </div>
+                      </div>
+                      <div class="col-lg-1 col-md-1 col-sm-1">
+                        <div class="form-group">
+                          <label class="label" style="color: white">Add</label>
+                          <button [disabled]="targetAmfSet.regionId===''" nbButton (click)="addTargetAmfSet()">+</button>                           
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <table class ="table">
+                              <tr style="text-align: center;">
+                                <th>RegionId</th>
+                                <th>Set Id</th>
+                              </tr>
+                              <tr *ngFor="let targetAmfSetItem of nsiProfile.targetAmfSet" style="text-align: center;" >
+                                <td>{{ targetAmfSetItem.regionId }}</td>
+                                <td>{{ targetAmfSetItem.setId }}</td>
+                              </tr>
+                            </table>
+                        </div>
+                      </div>
+                    </div>          
+                  </nb-card-body>
+              </nb-card>
+          </div>
+        </div>
+        <button *ngIf="editMode" type="submit" nbButton status="danger" (click)="create()">Submit</button>
+      </form>
+    </nb-card-body>
+  </nb-card>

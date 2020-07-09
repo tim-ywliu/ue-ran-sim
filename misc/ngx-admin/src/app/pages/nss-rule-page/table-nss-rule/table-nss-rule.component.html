@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-md-12">
+      <nb-card>
+    <nb-card-header>
+      NSS Rules
+    </nb-card-header>
+  
+    <nb-card-body>
+      <table class ="table">
+        <tr style="text-align: center;">
+          <th width="2%"></th>
+          <th width="2%"></th>
+          <th width="18%">Name</th>
+          <th width="15%">Salience</th>
+          <th width="25%">Snssai</th>
+          <th width="38%">Tai</th>        
+        </tr>
+        <tr *ngFor="let u of nssRules"  style="text-align: center;">
+          <td>  
+              <button class='btn btn-danger' (click)="deleteNssRule(u)">
+                  <i class="fas fa-trash-alt"></i>                  
+              </button>            
+          </td>
+          <td>  
+              <button class='btn btn-primary' (click)="show(u)">
+                  <i class="fa fa-search"></i>                  
+              </button>            
+          </td>
+          <td>
+              <button nbButton status="primary" size= small ghost>                  
+                  <span>{{u.name}}</span>
+              </button>
+          </td>
+          <td>
+              <button nbButton status="primary" size= small ghost>                  
+                  <span>{{u.salience}}</span>
+              </button>
+          </td>
+          <td>
+              <button nbButton status="primary" size= small outline>                  
+                  <span>SST: {{u.snssai.sst}}</span>
+              </button>              
+          </td>
+          <td>
+              <button nbButton status="primary" size= small outline>                  
+                  <span>MCC: {{u.tai.plmnId.mcc}}</span>
+              </button> 
+              &nbsp;
+              <button nbButton status="primary" size= small outline>                  
+                  <span>MNC: {{u.tai.plmnId.mnc}}</span>
+              </button>
+              &nbsp;
+              <button nbButton status="primary" size= small outline>                  
+                  <span>TAC: {{u.tai.tac}}</span>
+              </button>                
+          </td>
+        </tr>        
+      </table>      
+    </nb-card-body>
+  </nb-card>
+  </div>
+  </div>
+  
