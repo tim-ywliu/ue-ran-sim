@@ -26,7 +26,7 @@
 
 package tr.havelsan.ueransim.events.ue;
 
-import tr.havelsan.ueransim.events.SimulationEvent;
+import tr.havelsan.ueransim.events.BaseEvent;
 
-public abstract class UeEvent extends SimulationEvent {
+public abstract class UeEvent extends BaseEvent {
 }

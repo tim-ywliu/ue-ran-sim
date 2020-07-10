@@ -24,19 +24,15 @@
  * @author Ali Güngör (aligng1620@gmail.com)
  */
 
-package tr.havelsan.ueransim.utils;
+package tr.havelsan.ueransim.api.sys;
 
-public enum Tag {
-    SYSTEM,
-    STATE,
-    CONFIG,
-    VALUE,
-    PROC,
-    PROCEDURE_RESULT,
-    NGAP_INTERNAL,
-    MESSAGING,
-    CONNECTION,
-    EVENT,
-    NAS_SECURITY,
-    NOT_IMPL_YET;
+import tr.havelsan.ueransim.ngap2.UserLocationInformationNr;
+
+import java.util.UUID;
+
+public class MockedRadio {
+
+    public static UserLocationInformationNr findLocationOfUe(SimulationContext ctx, UUID ueId) {
+        return Simulation.findUe(ctx, ueId).ueConfig.userLocationInformationNr;
+    }
 }
