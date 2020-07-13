@@ -6,14 +6,13 @@ import io.javalin.websocket.*;
 import org.jetbrains.annotations.NotNull;
 import tr.havelsan.ueransim.Program;
 import tr.havelsan.ueransim.events.EventParser;
-import tr.havelsan.ueransim.utils.Console;
+import tr.havelsan.ueransim.utils.*;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Backend {
-
 
     public static void main(String[] args) {
 
@@ -33,21 +32,22 @@ public class Backend {
 
     static class Handler implements WsMessageHandler, WsConnectHandler {
 
-        List<String> stringList = new ArrayList<>();
+        List<LogEntry> logEntries = new ArrayList<>();
 
         public Handler() {
-            Console.addPrintHandler(str -> stringList.add(str));
+            Logging.addLogHandler(h -> logEntries.add(h));
         }
 
         @Override
         public void handleMessage(@NotNull WsMessageContext ctx) {
 
 
-            for (var s : stringList) {
-                ctx.send(new Wrapper("log",s));
+            for (var s : logEntries) {
+                ctx.send(new Wrapper("log", s));
+
             }
 
-            stringList.clear();
+            logEntries.clear();
 
         }
 
