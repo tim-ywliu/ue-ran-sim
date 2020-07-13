@@ -8,6 +8,7 @@ import io.javalin.websocket.WsMessageContext;
 import io.javalin.websocket.WsMessageHandler;
 import org.jetbrains.annotations.NotNull;
 import tr.havelsan.ueransim.events.EventParser;
+import tr.havelsan.ueransim.utils.Json;
 import tr.havelsan.ueransim.utils.LogEntry;
 import tr.havelsan.ueransim.utils.Logging;
 
@@ -18,7 +19,7 @@ import java.util.Queue;
 
 public class Backend {
 
-    private static Queue<String> cmdQueue = new ArrayDeque<>();
+    private static final Queue<String> cmdQueue = new ArrayDeque<>();
 
     public static void main(String[] args) {
 
@@ -46,12 +47,13 @@ public class Backend {
         @Override
         public void handleMessage(@NotNull WsMessageContext ctx) {
 
-
             for (var s : logEntries) {
                 ctx.send(new Wrapper("log", s));
 
             }
 
+            String s = Json.fromJson(ctx.message(),String.class);
+            cmdQueue.add(s);
             logEntries.clear();
 
         }
