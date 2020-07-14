@@ -38,10 +38,10 @@ public class Backend {
 
     static class Handler implements WsMessageHandler, WsConnectHandler {
 
-        List<LogEntry> logEntries = new ArrayList<>();
+        final List<LogEntry> logEntries = new ArrayList<>();
 
         public Handler() {
-            Logging.addLogHandler(h -> logEntries.add(h));
+            Logging.addLogHandler(logEntries::add);
         }
 
         @Override
@@ -49,10 +49,9 @@ public class Backend {
 
             for (var s : logEntries) {
                 ctx.send(new Wrapper("log", s));
-
             }
 
-            String s = Json.fromJson(ctx.message(),String.class);
+            String s = Json.fromJson(ctx.message(), String.class);
             cmdQueue.add(s);
             logEntries.clear();
 
